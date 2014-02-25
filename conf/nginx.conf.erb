@@ -97,6 +97,14 @@ http {
     #  #   rewrite ^/feed/?$ http://feeds.feedburner.com/feedburner-feed-id last;
     #  # }
     #}
+    
+    if (!-f $request_filename){
+      set $rule_0 1$rule_0;
+    }
+    
+    if ($rule_0 = "1"){
+      rewrite ^/(.*)$ /web/app.php last;
+    }
 
     include /app/conf/nginx.d/*.conf;
 
@@ -109,12 +117,4 @@ http {
       fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
   }
-}
-
-if (!-f $request_filename){
-    set $rule_0 1$rule_0;
-}
-
-if ($rule_0 = "1"){
-    rewrite ^/(.*)$ /web/app.php last;
 }
