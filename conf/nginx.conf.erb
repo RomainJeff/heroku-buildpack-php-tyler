@@ -103,7 +103,7 @@ http {
     }
     
     if ($rule_0 = "1"){
-      rewrite ^/(.*)$ /web/app.php last;
+      rewrite ^(.*)$ /web/index.php last;
     }
 
     include /app/conf/nginx.d/*.conf;
